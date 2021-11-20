@@ -54,7 +54,7 @@ resource "google_sql_database_instance" "master" {
     disk_autoresize   = var.disk_autoresize
 
     dynamic "insights_config" {
-      for_each = var.is_postgres == true && var.query_insights_enabled ? [1] : []
+      for_each = local.is_postgres == true && var.query_insights_enabled ? [1] : []
       content {
         query_insights_enabled  = var.query_insights_enabled
         query_string_length     = var.insights_query_string_length
