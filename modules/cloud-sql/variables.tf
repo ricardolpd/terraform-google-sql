@@ -239,6 +239,30 @@ variable "deletion_protection" {
   default     = "true"
 }
 
+variable "query_insights_enabled" {
+  description = "True if Query Insights feature is enabled, only allowed within postgres instances."
+  type        = bool
+  default     = false
+}
+
+variable "insights_query_string_length" {
+  description = "Maximum query length stored in bytes. Between 256 and 4500. Default to 1024."
+  type        = number
+  default     = 1024
+}
+
+variable "insights_record_application_tags" {
+  description = "True if Query Insights will record application tags from query when enabled."
+  type        = bool
+  default     = false
+}
+
+variable "insights_record_client_address" {
+  description = "True if Query Insights will record client address when enabled."
+  type        = bool
+  default     = false
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # MODULE DEPENDENCIES
 # Workaround Terraform limitation where there is no module depends_on.

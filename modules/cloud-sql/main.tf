@@ -53,6 +53,16 @@ resource "google_sql_database_instance" "master" {
     activation_policy = var.activation_policy
     disk_autoresize   = var.disk_autoresize
 
+    dynamic "insights_config" {
+      for_each = var.is_postgres == true && var.query_insights_enabled ? [1] : []
+      content {
+        query_insights_enabled  = var.query_insights_enabled
+        query_string_length     = var.insights_query_string_length
+        record_application_tags = var.insights_record_application_tags
+        record_client_address   = var.insights_record_client_address
+      }
+    }
+
     ip_configuration {
       dynamic "authorized_networks" {
         for_each = var.authorized_networks
